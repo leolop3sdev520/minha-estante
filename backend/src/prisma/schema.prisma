@@ -1,0 +1,35 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+    quero_ler
+    lendo
+    lido
+}
+
+model Livro {
+    id                 String    @id @default(uuid()) @db.Uuid
+    titulo             String    @db.VarChar(150)
+    titulo_normalizado String    @db.VarChar(150)
+    autor              String    @db.VarChar(150)
+    autor_normalizado  String    @db.VarChar(150)
+    ano_publicacao     Int?
+    numero_paginas     Int?
+    resenha            String?   @db.Text
+    status             Status    @default(quero_ler)
+    nota               Int?      @db.SmallInt
+    data_inicio        DateTime? @db.Date
+    data_conclusao     DateTime? @db.Date
+    created_at         DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at         DateTime  @updatedAt @db.Timestamptz(6)
+
+    @@unique([titulo_normalizado, autor_normalizado], name: "livros_titulo_autor_unique")
+    @@index([status], name: "livros_status_idx")
+    @@index([updated_at(sort: Desc)], name: "livros_updated_at_idx")
+}

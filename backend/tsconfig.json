@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    // Target e módulo — Node.js moderno
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2024"],
+
+    // Strict mode completo
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Compatibilidade de importações
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Saída
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    // Source maps para debug
+    "sourceMap": true,
+
+    // Resolução de tipos
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    
+    // Necessário para o NodeNext não reclamar de arquivos soltos
+    "moduleDetection": "force" 
+  },
+  // AQUI ESTÁ A CORREÇÃO: Adicionado o prisma.config.ts
+  "include": ["src/**/*.ts"], 
+  "exclude": ["node_modules", "dist"]
+}
